@@ -5,18 +5,22 @@ using UnityEngine;
 public class iniMovement : MonoBehaviour
 {
     private Rigidbody rb;
-    private Vector3[] direc= {transform.forward,-transform.forward,transform.right,-transform.right};
+    private Vector3[] direct;
+
+    public float movement_force = 10.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();        
-    }
+        rb = GetComponent<Rigidbody>();
 
+        direct = new Vector3[] { transform.forward, -transform.forward, transform.right, -transform.right };
+    }
+    
     // Update is called once per frame
-    void Update()
-    {	
-	int index = Random.Range(0, 3);
-        rb.AddRelativeForce( direc[index] * 150);
+    void FixedUpdate()
+    {
+        // Añade una fuerza al objeto en una dirección aleatoria
+        rb.AddRelativeForce(direct[Random.Range(0, 3)] * movement_force);
     }
 }
